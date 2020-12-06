@@ -4,17 +4,17 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 url='http://quotes.toscrape.com/tag/'
 type_=["love","inspirational","life","humor","books","reading","friendship","friends","truth","simile",]
-for i in range(len(type_)):
-    r=requests.get(url+type_[i])
-    print(url+type_[i])
-    soup=BeautifulSoup(r.text,'lxml')
-    # pprint(soup)
-    quotes=soup.find_all('span',class_='text')
-    # print(quotes)
-    author=soup.find_all('small',class_='author')
-    tags=soup.find_all('div',class_='tags')
-    # print(tags)
-    with open('Allquotes.txt','a',encoding='utf-8') as f:
+with open('Allquotes.txt','w',encoding='utf-8') as f:    
+    for i in range(len(type_)):
+        r=requests.get(url+type_[i])
+        print(url+type_[i])
+        soup=BeautifulSoup(r.text,'lxml')
+        # pprint(soup)
+        quotes=soup.find_all('span',class_='text')
+        # print(quotes)
+        author=soup.find_all('small',class_='author')
+        tags=soup.find_all('div',class_='tags')
+        # print(tags)
         f.write('\n\n')
         for i in range(len(quotes)):
             print(author[i].text)
